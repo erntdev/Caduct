@@ -34,6 +34,11 @@ public class AdminAcercaDe extends javax.swing.JFrame {
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, -1, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/inicio.png"))); // NOI18N
+        jLabel4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel4KeyPressed(evt);
+            }
+        });
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 250, -1, -1));
 
         jLabel3.setBackground(new java.awt.Color(186, 214, 253));
@@ -43,6 +48,12 @@ public class AdminAcercaDe extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel4KeyPressed
+        AdminInicio  s = new AdminInicio();
+        s.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel4KeyPressed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
