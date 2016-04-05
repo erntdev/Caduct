@@ -1,9 +1,5 @@
 package presentacion;
 
-import java.awt.Image;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-
 public class AdminInicio extends javax.swing.JFrame {
 
     public AdminInicio() {
@@ -21,7 +17,24 @@ public class AdminInicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblLogoEmpresa = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        lblNombreAdministrador = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        lblEslogan = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         lblFondo = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
@@ -34,8 +47,78 @@ public class AdminInicio extends javax.swing.JFrame {
         setTitle("Administrador");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/AdminFondo.png"))); // NOI18N
-        getContentPane().add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 550));
+        lblLogoEmpresa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/oxxo.png"))); // NOI18N
+        getContentPane().add(lblLogoEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
+
+        jPanel2.setBackground(new java.awt.Color(254, 254, 254));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Verdana", 1, 15)); // NOI18N
+        jLabel2.setText("PLAZA AJUSCO");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Verdana", 1, 15)); // NOI18N
+        jLabel3.setText("(55) 9183-7500");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Verdana", 1, 15)); // NOI18N
+        jLabel5.setText("Col. Letrán Valle");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Verdana", 1, 15)); // NOI18N
+        jLabel6.setText("Del. Benito Juárez");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Verdana", 1, 15)); // NOI18N
+        jLabel7.setText("C.P. 03650");
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, -1));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/oficina.jpg"))); // NOI18N
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Verdana", 1, 15)); // NOI18N
+        jLabel9.setText("Sucursal:");
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, -1, -1));
+
+        jPanel4.setLayout(new java.awt.GridBagLayout());
+
+        jLabel10.setFont(new java.awt.Font("Trebuchet MS", 1, 15)); // NOI18N
+        jLabel10.setText("Bienvenido: ");
+        jPanel4.add(jLabel10, new java.awt.GridBagConstraints());
+        jPanel4.add(lblNombreAdministrador, new java.awt.GridBagConstraints());
+
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, 50));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 570, 310));
+
+        jPanel3.setBackground(new java.awt.Color(165, 4, 4));
+        jPanel3.setLayout(new java.awt.GridBagLayout());
+
+        lblEslogan.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        lblEslogan.setForeground(new java.awt.Color(254, 254, 254));
+        lblEslogan.setText("\"Siempre listos, siempre ahí\"");
+        jPanel3.add(lblEslogan, new java.awt.GridBagConstraints());
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 60));
+
+        jPanel1.setBackground(new java.awt.Color(247, 142, 21));
+        jPanel1.setForeground(new java.awt.Color(127, 2, 2));
+        jPanel1.setLayout(new java.awt.GridBagLayout());
+
+        jLabel1.setBackground(new java.awt.Color(255, 250, 250));
+        jLabel1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(156, 1, 1));
+        jLabel1.setText("Sistema para la gestión de la caducidad de los productos");
+        jPanel1.add(jLabel1, new java.awt.GridBagConstraints());
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 470, 960, 30));
+
+        lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/AdminFondo.jpg"))); // NOI18N
+        getContentPane().add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 500));
+
+        jLabel4.setFont(new java.awt.Font("Verdana", 1, 15)); // NOI18N
+        jLabel4.setText("Calle Petén No. 550");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 325, -1, -1));
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/inicio.png"))); // NOI18N
         jMenu1.setText("Inicio");
@@ -111,6 +194,16 @@ public class AdminInicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -118,6 +211,13 @@ public class AdminInicio extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JLabel lblEslogan;
     private javax.swing.JLabel lblFondo;
+    private javax.swing.JLabel lblLogoEmpresa;
+    private javax.swing.JLabel lblNombreAdministrador;
     // End of variables declaration//GEN-END:variables
 }
