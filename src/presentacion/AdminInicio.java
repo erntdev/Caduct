@@ -29,12 +29,12 @@ public class AdminInicio extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         lblNombreAdministrador = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         lblEslogan = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lblFondo = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
@@ -63,15 +63,15 @@ public class AdminInicio extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Verdana", 1, 15)); // NOI18N
         jLabel5.setText("Col. Letrán Valle");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Verdana", 1, 15)); // NOI18N
         jLabel6.setText("Del. Benito Juárez");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Verdana", 1, 15)); // NOI18N
         jLabel7.setText("C.P. 03650");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, -1));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/oficina.jpg"))); // NOI18N
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, -1, -1));
@@ -88,6 +88,10 @@ public class AdminInicio extends javax.swing.JFrame {
         jPanel4.add(lblNombreAdministrador, new java.awt.GridBagConstraints());
 
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, 50));
+
+        jLabel4.setFont(new java.awt.Font("Verdana", 1, 15)); // NOI18N
+        jLabel4.setText("Calle Petén No. 550");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 570, 310));
 
@@ -115,10 +119,6 @@ public class AdminInicio extends javax.swing.JFrame {
 
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/AdminFondo.jpg"))); // NOI18N
         getContentPane().add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 500));
-
-        jLabel4.setFont(new java.awt.Font("Verdana", 1, 15)); // NOI18N
-        jLabel4.setText("Calle Petén No. 550");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 325, -1, -1));
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/inicio.png"))); // NOI18N
         jMenu1.setText("Inicio");
