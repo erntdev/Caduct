@@ -1,0 +1,10 @@
+# Archivos ignorados
+build/
+nbproject/
+nbbuild/
+dist/
+nbdist/
+build.xml
+nbactions.xml
+.nb-gradle/
+*~
