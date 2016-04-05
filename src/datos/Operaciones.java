@@ -16,52 +16,21 @@ public class Operaciones {
         this.stmt = stmt;
     }
 
-    public Operaciones() throws SQLException {
+    public Operaciones() {
     }
 
-    public ResultSet ConsultaBase(String consulta) {
+    public ResultSet DBase(String consulta) {
         ResultSet resultado = null;
         try {
 
             Conexion conexion = new Conexion();
             stmt = conexion.con.createStatement();
             resultado = stmt.executeQuery(consulta);
-            conexion.con.close();
+            
             return resultado;
         } catch (SQLException ex) {
             Logger.getLogger(Operaciones.class.getName()).log(Level.SEVERE, null, ex);
         }
         return resultado;
     }
-
-    public boolean InsercionBase(String consulta) {
-        boolean respuesta = true;
-        try {
-
-            Conexion conexion = new Conexion();
-            stmt = conexion.con.createStatement();
-            respuesta = stmt.execute(consulta);
-            conexion.con.close();
-            return respuesta;
-        } catch (SQLException ex) {
-            Logger.getLogger(Operaciones.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return respuesta;
-    }
-
-    public boolean ActualizacionBase(String consulta) {
-        boolean respuesta = true;
-        try {
-
-            Conexion conexion = new Conexion();
-            stmt = conexion.con.createStatement();
-            respuesta = stmt.execute(consulta);
-            conexion.con.close();
-            return respuesta;
-        } catch (SQLException ex) {
-            Logger.getLogger(Operaciones.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return respuesta;
-    }
-
 }

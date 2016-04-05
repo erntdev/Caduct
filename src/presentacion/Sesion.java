@@ -1,15 +1,13 @@
 package presentacion;
 
-public class Sesion extends javax.swing.JFrame {
+import javax.swing.JOptionPane;
+import logica.Empleado;
 
-    public int a;
-    private Object evt;
+public class Sesion extends javax.swing.JFrame {
 
     public Sesion() {
         initComponents();
-
         setLocationRelativeTo(null);
-
     }
 
     public boolean acceso(String valor) {
@@ -58,7 +56,7 @@ public class Sesion extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("ADMINISTRADOR");
+        setTitle("Login");
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -153,15 +151,23 @@ public class Sesion extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        String valor="";
-        logica.IniciarSesion is = new logica.IniciarSesion();
-        valor = is.BusquedaPersona(txtUsuario.getText(), txtPassword.getText());
+        boolean numEmpleado;
+        logica.Empleado e = new logica.Empleado();
+        numEmpleado = e.buscarEmpleado(txtUsuario.getText(), txtPassword.getText());
         
-        boolean bandera = acceso(valor);
-        if (bandera) {
-            CajeroInicio ci = new CajeroInicio();
-            ci.setVisible(bandera);
-            dispose();
+        if (numEmpleado) {
+            if (Empleado.id_empleado == 1) {
+                AdminInicio adminInicio = new AdminInicio();
+                adminInicio.setVisible(true);
+                dispose();
+            } else {
+                CajeroInicio cajeroInicio = new CajeroInicio();
+                cajeroInicio.setVisible(true);
+                dispose();
+            }
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Usuario no encontrado");
         }
 
 // TODO add your handling code here:
