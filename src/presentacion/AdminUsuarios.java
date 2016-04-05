@@ -2,9 +2,6 @@ package presentacion;
 
 public class AdminUsuarios extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AdminUsuarios
-     */
     public AdminUsuarios() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -44,6 +41,7 @@ public class AdminUsuarios extends javax.swing.JFrame {
         jMenu6 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Usuarios");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(254, 254, 254));
