@@ -68,6 +68,50 @@ public class DatosProducto {
         return modelo;
     }
     
+    public TableModel listarProductosCaducados(String fechaActual) {
+        DefaultTableModel modelo = new DefaultTableModel() {
+            public boolean isCellEditable(int row, int column) { //Esto se realiza para que las celdas no sean editables
+                return false;
+            }
+        };
+
+        try {
+            DatosOperaciones consulta = new DatosOperaciones();
+            //select Productos.codigo, Productos.nombre,  Productos.cantidad,
+            //Fechas.fecha_ingreso, Fechas.fecha_caducidad from Productos, 
+            //Fechas where Productos.codigo=Fechas.codigo and Fechas.fecha_caducidad<'2016/04/06';
+
+            
+            ResultSet resultado = consulta.DBase("select Productos.codigo, Productos.nombre, "
+                    + "Productos.cantidad, Fechas.fecha_ingreso, "
+                    + "Fechas.fecha_caducidad from Productos, Fechas where "
+                    + "Productos.codigo=Fechas.codigo and Fechas.fecha_caducidad<'"+fechaActual+"';");
+
+            //Obteniendo la informacion de las columnas que estan siendo consultadas
+            ResultSetMetaData Columnas = resultado.getMetaData();
+            //La cantidad de columnas que tiene la consulta
+            int cantidadColumnas = Columnas.getColumnCount();
+
+            //Establecer como cabezeras el nombre de las columnas
+            for (int i = 1; i <= cantidadColumnas; i++) {
+                modelo.addColumn(Columnas.getColumnLabel(i)); //Agrega columnas al modelo con el titulo extraido de la metadata
+            }
+            //Extrae las filas del resultSet y los para al modelo
+            while (resultado.next()) {
+                Object[] fila = new Object[cantidadColumnas];
+                for (int i = 0; i < cantidadColumnas; i++) {
+                    fila[i] = resultado.getObject(i + 1);
+                }
+                modelo.addRow(fila); //agregamos al modelo la fila extraida.
+            }
+            consulta.getStmt().close(); //Cierra el preparador  de sentencias SQL
+            return modelo;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return modelo;
+    }
+    
     public Producto getProducto(String codigo){
         Producto datosProducto = null;
         

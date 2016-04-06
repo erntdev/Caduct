@@ -1,5 +1,8 @@
 package logica;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -16,12 +19,32 @@ public class ConsultasProducto {
         return respuesta;
     }
     
-    public TableModel listarEmpleados(){
+    public TableModel listarProductos(){
         TableModel modelo = new DefaultTableModel();
 
         try {
             datos.DatosProducto productos = new datos.DatosProducto();
             modelo = productos.listarProductosVista();
+
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+        return modelo;
+    }
+    
+    public String fechaActual(){
+        String formatoFecha="YYYY/MM/dd";
+        DateFormat f1 = new SimpleDateFormat(formatoFecha);
+        
+        return f1.format(new Date());
+    }
+    
+    public TableModel listarProductosCaducados(){
+        TableModel modelo = new DefaultTableModel();
+
+        try {
+            datos.DatosProducto productos = new datos.DatosProducto();
+            modelo = productos.listarProductosCaducados(fechaActual());
 
         } catch (Exception ex) {
             System.out.println(ex);

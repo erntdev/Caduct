@@ -25,7 +25,7 @@ public class AdminProductos extends javax.swing.JFrame {
         TableModel modelo = new DefaultTableModel();
         
         //Extraemos la lista de empleados dentro de un modelo
-        modelo=productos.listarEmpleados();
+        modelo=productos.listarProductos();
 
         //Asociamos el modelo al JTable
         this.tbProductosRegistrados.setModel(modelo);

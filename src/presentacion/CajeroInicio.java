@@ -20,6 +20,7 @@ public class CajeroInicio extends javax.swing.JFrame {
         
         establecerNombreAdmin();
         listarProductosRegistrados();
+        listarProductosCaducados();
     }
     
     public void listarProductosRegistrados(){
@@ -29,11 +30,20 @@ public class CajeroInicio extends javax.swing.JFrame {
         TableModel modelo = new DefaultTableModel();
 
         //Extraemos la lista de empleados dentro de un modelo
-        modelo = productos.listarEmpleados();
+        modelo = productos.listarProductos();
 
         //Asociamos el modelo al JTable
         this.tbProductos.setModel(modelo);
 
+    }
+    
+    public void listarProductosCaducados(){
+        logica.ConsultasProducto productos = new logica.ConsultasProducto();
+        TableModel modelo = new DefaultTableModel();
+
+        modelo = productos.listarProductosCaducados();
+
+        this.tbProductosCaducados.setModel(modelo);
     }
 
     public void establecerNombreAdmin() {
@@ -417,8 +427,8 @@ public class CajeroInicio extends javax.swing.JFrame {
         jPanelFondo.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 480, 440, 190));
 
         jLabel11.setText("Buscar:");
-        jPanelFondo.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 480, -1, 30));
-        jPanelFondo.add(txtBuscarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 490, 90, -1));
+        jPanelFondo.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 480, -1, 30));
+        jPanelFondo.add(txtBuscarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 480, 90, -1));
 
         lblBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
         lblBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
