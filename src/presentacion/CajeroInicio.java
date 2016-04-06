@@ -42,6 +42,14 @@ public class CajeroInicio extends javax.swing.JFrame {
         TableModel modelo = new DefaultTableModel();
 
         modelo = productos.listarProductosCaducados();
+        
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+            String codigo = modelo.getValueAt(i, 0).toString();
+            String nombre = modelo.getValueAt(i, 1).toString();
+            JOptionPane.showMessageDialog(null, "El producto con código: "+codigo+" "
+                    + "("+nombre+") ha caducado. Por favor retírelo de la tienda "
+                    + "y proceda a eliminarlo del inventario.");
+        }
 
         this.tbProductosCaducados.setModel(modelo);
     }
@@ -60,6 +68,7 @@ public class CajeroInicio extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Producto eliminado con éxito");
             limpiarCampos();
             listarProductosRegistrados();
+            listarProductosCaducados();
         }
         else
             JOptionPane.showMessageDialog(rootPane, "Error al eliminar el producto");
@@ -500,8 +509,8 @@ public class CajeroInicio extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CajeroInicio().setVisible(true);
-            }
+                new CajeroInicio().setVisible(true);   
+            } 
         });
     }
 
