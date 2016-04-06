@@ -17,8 +17,8 @@ public class DatosEmpleado {
             ResultSet resultado = consulta.DBase("select id_empleado from Empleados where "
                     + "nickname='"+nickname+"' and contraseña='"+password+"';");
             
-            resultado.next();
-            numEmpleado = resultado.getInt("id_empleado");
+            if (resultado.next())
+                numEmpleado = resultado.getInt("id_empleado");
             
             consulta.getStmt().close();
             

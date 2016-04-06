@@ -1,11 +1,17 @@
 package presentacion;
 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import logica.Empleado;
+import logica.Producto;
 
 public class CajeroInicio extends javax.swing.JFrame {
     
     private Empleado empleado = null;
+    private Producto producto = null;
     private logica.ConsultasEmpleado consultaEmpleado = null;
+    private logica.ConsultasProducto consultaProducto = null;
     
     public CajeroInicio() {
         initComponents();
@@ -13,14 +19,48 @@ public class CajeroInicio extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         
         establecerNombreAdmin();
+        listarProductosRegistrados();
     }
     
-     public void establecerNombreAdmin(){
+    public void listarProductosRegistrados(){
+        
+        logica.ConsultasProducto productos = new logica.ConsultasProducto();
+        //Creamos un modelo de tabla
+        TableModel modelo = new DefaultTableModel();
+
+        //Extraemos la lista de empleados dentro de un modelo
+        modelo = productos.listarEmpleados();
+
+        //Asociamos el modelo al JTable
+        this.tbProductos.setModel(modelo);
+
+    }
+
+    public void establecerNombreAdmin() {
         // Creación de instancia para almacenar los datos personale del Empleado
         consultaEmpleado = new logica.ConsultasEmpleado();
         empleado = consultaEmpleado.getEmpleado(Empleado.id_empleado);
-        this.txtNombreCajero.setText(empleado.getNombre()+" "+empleado.getApellido_paterno()+" "+empleado.getApellido_materno());
+        this.txtNombreCajero.setText(empleado.getNombre() + " " + empleado.getApellido_paterno() + " " + empleado.getApellido_materno());
         this.txtNickname.setText(empleado.getNickname());
+    }
+    
+    public void eliminarProducto(String codigo){
+        
+        if (!consultaProducto.eliminarProducto(codigo))  {
+            JOptionPane.showMessageDialog(rootPane, "Producto eliminado con éxito");
+            limpiarCampos();
+            listarProductosRegistrados();
+        }
+        else
+            JOptionPane.showMessageDialog(rootPane, "Error al eliminar el producto");
+    }
+    
+    public void limpiarCampos(){
+        this.txtNombreProducto.setText("");
+        this.txtCosto.setText("");
+        this.txtCantidad.setText("");
+        this.txtFechaIngreso.setText("");
+        this.txtFechaCaducidad.setText("");
     }
 
     /**
@@ -69,6 +109,7 @@ public class CajeroInicio extends javax.swing.JFrame {
         tbProductosCaducados = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
         txtBuscarProducto = new javax.swing.JTextField();
+        lblBuscar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cajero");
@@ -262,6 +303,7 @@ public class CajeroInicio extends javax.swing.JFrame {
 
         jLabel16.setText("Fecha de caducidad");
 
+        txtNombreProducto.setForeground(new java.awt.Color(254, 25, 25));
         txtNombreProducto.setEnabled(false);
 
         txtCosto.setEnabled(false);
@@ -278,6 +320,11 @@ public class CajeroInicio extends javax.swing.JFrame {
         });
 
         jButton1.setText("Eliminar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -370,8 +417,16 @@ public class CajeroInicio extends javax.swing.JFrame {
         jPanelFondo.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 480, 440, 190));
 
         jLabel11.setText("Buscar:");
-        jPanelFondo.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 480, -1, 30));
-        jPanelFondo.add(txtBuscarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 480, 90, -1));
+        jPanelFondo.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 480, -1, 30));
+        jPanelFondo.add(txtBuscarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 490, 90, -1));
+
+        lblBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/buscar.png"))); // NOI18N
+        lblBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBuscarMouseClicked(evt);
+            }
+        });
+        jPanelFondo.add(lblBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 480, -1, -1));
 
         getContentPane().add(jPanelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 690));
 
@@ -387,6 +442,23 @@ public class CajeroInicio extends javax.swing.JFrame {
         pantallaSesion.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void lblBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBuscarMouseClicked
+        consultaProducto = new logica.ConsultasProducto();
+        producto = consultaProducto.getProducto(this.txtBuscarProducto.getText());
+        if (producto != null) {
+            this.txtNombreProducto.setText(producto.getNombre());
+            this.txtCosto.setText(producto.getCosto() + "");
+            this.txtCantidad.setText(producto.getCantidad() + "");
+            this.txtFechaIngreso.setText(producto.getFecha_ingreso());
+            this.txtFechaCaducidad.setText(producto.getFecha_caducidad());
+        } else
+            JOptionPane.showMessageDialog(null, "El producto no se encuentra en la tienda");
+    }//GEN-LAST:event_lblBuscarMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        eliminarProducto(producto.getCodigo());
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -451,6 +523,7 @@ public class CajeroInicio extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelFondo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblBuscar;
     private javax.swing.JTable tbProductos;
     private javax.swing.JTable tbProductosCaducados;
     private javax.swing.JTextField txtBuscarProducto;

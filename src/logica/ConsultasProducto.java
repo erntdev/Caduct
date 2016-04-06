@@ -28,4 +28,31 @@ public class ConsultasProducto {
         }
         return modelo;
     }
+    
+    public Producto getProducto(String codigo){
+        Producto datosP= null;
+        try {
+            datos.DatosProducto de = new datos.DatosProducto();
+            datosP = de.getProducto(codigo);
+            
+            return datosP;
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return datosP;
+    }
+    
+    public boolean eliminarProducto(String codigo) {
+        boolean respuesta=true;
+        try {
+            datos.DatosProducto de = new datos.DatosProducto();
+            respuesta = de.eliminarProducto(codigo);
+            
+        } catch (Exception e) {
+            System.out.println("Se ha presentado el siguiente Error: "+e);
+        }
+        return respuesta;
+    }
 }
