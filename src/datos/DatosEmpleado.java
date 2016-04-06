@@ -71,7 +71,7 @@ public class DatosEmpleado {
         }
         return respuesta;
     }
-    
+
     public TableModel listarEmpleadosVista() {
         DefaultTableModel modelo = new DefaultTableModel() {
             public boolean isCellEditable(int row, int column) { //Esto se realiza para que las celdas no sean editables

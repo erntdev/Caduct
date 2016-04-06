@@ -27,8 +27,6 @@ public class AdminUsuarios extends javax.swing.JFrame {
         //Asociamos el modelo al JTable
         this.tbUsuariosRegistrados.setModel(modelo);
         
-        
-        
     }
     
     public boolean verificarCamposVacios(){
@@ -308,6 +306,7 @@ public class AdminUsuarios extends javax.swing.JFrame {
         
         if (!verificarCamposVacios()) {
             guardarDatos();
+            listarUsuariosRegistrados();
         }
         
     }//GEN-LAST:event_btnRegistrarActionPerformed

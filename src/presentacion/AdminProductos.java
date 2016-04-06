@@ -1,11 +1,79 @@
 package presentacion;
 
-public class AdminProductos extends javax.swing.JFrame {
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
+public class AdminProductos extends javax.swing.JFrame {
+    
+    private logica.Producto producto;
+    
     public AdminProductos() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        listarProductosRegistrados();
+    }
+    
+    public void listarProductosRegistrados(){
+        
+        logica.ConsultasProducto productos = new logica.ConsultasProducto();
+        //Creamos un modelo de tabla
+        TableModel modelo = new DefaultTableModel();
+        
+        //Extraemos la lista de empleados dentro de un modelo
+        modelo=productos.listarEmpleados();
+
+        //Asociamos el modelo al JTable
+        this.tbProductosRegistrados.setModel(modelo);
+        
+    }
+    
+    public boolean verificarCamposVacios(){
+        boolean bandera = false;
+        if (txtCodigo.getText().length()==0 || txtNombreProducto.getText().length()==0 || 
+                txtCosto.getText().length()==0 || txtCantidad.getText().length()==0 || 
+                txtDia.getText().length()==0 || txtMes.getText().length()==0 || txtAnio.getText().length()==0) {
+            JOptionPane.showMessageDialog(null, "Faltan campos por rellenar");
+            bandera = true;
+        }
+        return bandera;
+            
+    }
+    
+    public void guardarDatos() {
+        producto = new logica.Producto();
+        producto.setCodigo(this.txtCodigo.getText());
+        producto.setNombre(this.txtNombreProducto.getText());
+        producto.setCosto(Double.parseDouble(this.txtCosto.getText()));
+        producto.setCantidad(Integer.parseInt(this.txtCantidad.getText()));
+        producto.setFecha_caducidad(this.txtAnio.getText()+"-"+this.txtMes.getText()+"-"+this.txtDia.getText());
+        
+        String formatoFecha="YYYY/MM/dd";
+        DateFormat f1 = new SimpleDateFormat(formatoFecha);
+        
+        producto.setFecha_ingreso(f1.format(new Date()));
+        
+        logica.ConsultasProducto registroProducto = new logica.ConsultasProducto();
+        if (!registroProducto.registrarProducto(producto))  {
+            JOptionPane.showMessageDialog(rootPane, "Producto Registrado con éxito");
+            limpiarCampos();
+        }
+        else
+            JOptionPane.showMessageDialog(rootPane, "Fallo al registrar un nuevo Producto");
+    }
+    
+    public void limpiarCampos() {
+        this.txtCodigo.setText("");
+        this.txtNombreProducto.setText("");
+        this.txtCosto.setText("");
+        this.txtCantidad.setText("");
+        this.txtDia.setText("");
+        this.txtMes.setText("");
+        this.txtAnio.setText("");
     }
 
     /**
@@ -27,11 +95,19 @@ public class AdminProductos extends javax.swing.JFrame {
         txtNombreProducto = new javax.swing.JTextField();
         txtCosto = new javax.swing.JTextField();
         txtCantidad = new javax.swing.JTextField();
-        txtFechaCaducidad = new javax.swing.JTextField();
+        txtDia = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        txtMes = new javax.swing.JTextField();
+        txtAnio = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnRegistrar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jPanel = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbProductosRegistrados = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -58,6 +134,12 @@ public class AdminProductos extends javax.swing.JFrame {
 
         jLabel6.setText("Fecha caducidad:");
 
+        jLabel7.setText("Día");
+
+        jLabel8.setText("Mes");
+
+        jLabel9.setText("Año");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -72,11 +154,29 @@ public class AdminProductos extends javax.swing.JFrame {
                     .addComponent(jLabel6))
                 .addGap(51, 51, 51)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCosto)
+                    .addComponent(txtCosto, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
                     .addComponent(txtNombreProducto)
                     .addComponent(txtCantidad)
-                    .addComponent(txtFechaCaducidad, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtDia, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(12, 12, 12)
+                                    .addComponent(jLabel7)))
+                            .addGap(18, 18, 18)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtMes, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(12, 12, 12)
+                                    .addComponent(jLabel8)))
+                            .addGap(19, 19, 19)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(12, 12, 12)
+                                    .addComponent(jLabel9))
+                                .addComponent(txtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(52, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -101,8 +201,15 @@ public class AdminProductos extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(txtFechaCaducidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(51, Short.MAX_VALUE))
+                    .addComponent(txtDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 0, 580, 310));
@@ -112,16 +219,60 @@ public class AdminProductos extends javax.swing.JFrame {
 
         btnRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/registrar_producto.png"))); // NOI18N
         btnRegistrar.setText("Registrar");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnRegistrar, new java.awt.GridBagConstraints());
 
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cancelar_producto.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnCancelar, new java.awt.GridBagConstraints());
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 900, 60));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 510, 900, 60));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/oxxo_productos.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+
+        jPanel.setBackground(new java.awt.Color(254, 254, 254));
+        jPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Productos Registrados"));
+
+        tbProductosRegistrados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tbProductosRegistrados);
+
+        javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
+        jPanel.setLayout(jPanelLayout);
+        jPanelLayout.setHorizontalGroup(
+            jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 754, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+        jPanelLayout.setVerticalGroup(
+            jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLayout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        getContentPane().add(jPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 800, 160));
 
         jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/inicio.png"))); // NOI18N
         jMenu5.setText("Inicio");
@@ -211,6 +362,17 @@ public class AdminProductos extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenu3MouseClicked
 
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        limpiarCampos();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        if (!verificarCamposVacios()) {
+            guardarDatos();
+            listarProductosRegistrados();
+        }
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -255,6 +417,9 @@ public class AdminProductos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -263,12 +428,17 @@ public class AdminProductos extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JPanel jPanel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tbProductosRegistrados;
+    private javax.swing.JTextField txtAnio;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtCosto;
-    private javax.swing.JTextField txtFechaCaducidad;
+    private javax.swing.JTextField txtDia;
+    private javax.swing.JTextField txtMes;
     private javax.swing.JTextField txtNombreProducto;
     // End of variables declaration//GEN-END:variables
 }
