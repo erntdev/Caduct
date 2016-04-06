@@ -1,11 +1,26 @@
 package presentacion;
 
-public class CajeroInicio extends javax.swing.JFrame {
+import logica.Empleado;
 
+public class CajeroInicio extends javax.swing.JFrame {
+    
+    private Empleado empleado = null;
+    private logica.ConsultasEmpleado consultaEmpleado = null;
+    
     public CajeroInicio() {
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+        
+        establecerNombreAdmin();
+    }
+    
+     public void establecerNombreAdmin(){
+        // Creación de instancia para almacenar los datos personale del Empleado
+        consultaEmpleado = new logica.ConsultasEmpleado();
+        empleado = consultaEmpleado.getEmpleado(Empleado.id_empleado);
+        this.txtNombreCajero.setText(empleado.getNombre()+" "+empleado.getApellido_paterno()+" "+empleado.getApellido_materno());
+        this.txtNickname.setText(empleado.getNickname());
     }
 
     /**
@@ -192,6 +207,11 @@ public class CajeroInicio extends javax.swing.JFrame {
         btnSalir.setForeground(new java.awt.Color(1, 1, 1));
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cerrar_sesion.png"))); // NOI18N
         btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
         jPanelFondo.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, -1, -1));
 
         jPanel3.setBackground(new java.awt.Color(254, 254, 254));
@@ -361,6 +381,12 @@ public class CajeroInicio extends javax.swing.JFrame {
     private void txtFechaCaducidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaCaducidadActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFechaCaducidadActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        Sesion pantallaSesion = new Sesion();
+        pantallaSesion.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     /**
      * @param args the command line arguments

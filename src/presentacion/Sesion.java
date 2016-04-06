@@ -152,7 +152,7 @@ public class Sesion extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
         boolean numEmpleado;
-        logica.Empleado e = new logica.Empleado();
+        logica.ConsultasEmpleado e = new logica.ConsultasEmpleado();
         numEmpleado = e.buscarEmpleado(txtUsuario.getText(), txtPassword.getText());
         
         if (numEmpleado) {

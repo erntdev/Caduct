@@ -1,11 +1,27 @@
 package presentacion;
 
+import javax.swing.JOptionPane;
+
 public class AdminUsuarios extends javax.swing.JFrame {
 
     public AdminUsuarios() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+    }
+    
+    public boolean verificarCamposVacios(){
+        boolean bandera = false;
+        if (txtNombre.equals("") || txtApellidoPaterno.equals("") || txtApellidoMaterno.equals("") || txtNickName.equals("") || txtPassword.equals("")) {
+            JOptionPane.showMessageDialog(null, "Faltan campos por rellenar");
+            bandera = true;
+        }
+        return bandera;
+            
+    }
+    
+    public void guardarDatos() {
+        
     }
 
     /**
@@ -190,7 +206,11 @@ public class AdminUsuarios extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        // TODO add your handling code here:
+        
+        if (!verificarCamposVacios()) {
+            guardarDatos();
+        }
+        
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed

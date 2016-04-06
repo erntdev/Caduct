@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Operaciones {
+public class DatosOperaciones {
 
     private Statement stmt;
 
@@ -16,7 +16,7 @@ public class Operaciones {
         this.stmt = stmt;
     }
 
-    public Operaciones() {
+    public DatosOperaciones() {
     }
 
     public ResultSet DBase(String consulta) {
@@ -29,7 +29,7 @@ public class Operaciones {
             
             return resultado;
         } catch (SQLException ex) {
-            Logger.getLogger(Operaciones.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DatosOperaciones.class.getName()).log(Level.SEVERE, null, ex);
         }
         return resultado;
     }

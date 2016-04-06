@@ -1,11 +1,25 @@
 package presentacion;
 
-public class AdminInicio extends javax.swing.JFrame {
+import logica.Empleado;
 
+public class AdminInicio extends javax.swing.JFrame {
+    
+    private Empleado empleado = null;
+    private logica.ConsultasEmpleado consultaEmpleado = null;
+    
     public AdminInicio() {
+        empleado = new Empleado();
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        establecerNombreAdmin();
+    }
+    
+    public void establecerNombreAdmin(){
+        // Creación de instancia para almacenar los datos personale del Empleado
+        consultaEmpleado = new logica.ConsultasEmpleado();
+        empleado = consultaEmpleado.getEmpleado(Empleado.id_empleado);
+        this.lblNombreAdministrador.setText(empleado.getNombre()+" "+empleado.getApellido_paterno()+" "+empleado.getApellido_materno());
     }
 
     /**
@@ -85,6 +99,8 @@ public class AdminInicio extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Trebuchet MS", 1, 15)); // NOI18N
         jLabel10.setText("Bienvenido: ");
         jPanel4.add(jLabel10, new java.awt.GridBagConstraints());
+
+        lblNombreAdministrador.setFont(new java.awt.Font("Verdana", 1, 15)); // NOI18N
         jPanel4.add(lblNombreAdministrador, new java.awt.GridBagConstraints());
 
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, 50));

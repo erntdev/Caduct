@@ -6,25 +6,6 @@ public class Empleado {
     private String apellido_paterno;
     private String apellido_materno;
     private String nickname;
-    private String password;
-    
-    public boolean buscarEmpleado(String nickname, String password){
-        boolean encontrado=false;
-        try {
-            datos.Empleado empleado = new datos.Empleado();
-            id_empleado = empleado.buscarEmpleado(nickname,password);
-            
-            if (id_empleado>=1)
-                encontrado=true;
-            else
-                encontrado=false;
-            
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        
-        return encontrado;
-    }
 
     public String getNombre() {
         return nombre;
