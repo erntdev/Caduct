@@ -6,6 +6,7 @@ public class Empleado {
     private String apellido_paterno;
     private String apellido_materno;
     private String nickname;
+    private String password;
 
     public String getNombre() {
         return nombre;
@@ -37,5 +38,19 @@ public class Empleado {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    /**
+     * @return the password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

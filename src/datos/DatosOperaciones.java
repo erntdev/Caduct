@@ -16,9 +16,6 @@ public class DatosOperaciones {
         this.stmt = stmt;
     }
 
-    public DatosOperaciones() {
-    }
-
     public ResultSet DBase(String consulta) {
         ResultSet resultado = null;
         try {
@@ -32,5 +29,20 @@ public class DatosOperaciones {
             Logger.getLogger(DatosOperaciones.class.getName()).log(Level.SEVERE, null, ex);
         }
         return resultado;
+    }
+    
+    public boolean insercionBase(String consulta) {
+        boolean respuesta = true;
+        try {
+
+            Conexion conexion = new Conexion();
+            stmt = conexion.con.createStatement();
+            respuesta = stmt.execute(consulta);
+            
+            return respuesta;
+        } catch (SQLException ex) {
+            Logger.getLogger(DatosOperaciones.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return respuesta;
     }
 }

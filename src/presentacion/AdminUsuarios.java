@@ -1,18 +1,39 @@
 package presentacion;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 public class AdminUsuarios extends javax.swing.JFrame {
-
+    
+    private logica.Empleado empleado;
+    
     public AdminUsuarios() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        listarUsuariosRegistrados();
+    }
+    
+    public void listarUsuariosRegistrados(){
+        
+        logica.ConsultasEmpleado empleados = new logica.ConsultasEmpleado();
+        //Creamos un modelo de tabla
+        TableModel modelo = new DefaultTableModel();
+        
+        //Extraemos la lista de empleados dentro de un modelo
+        modelo=empleados.listarEmpleados();
+
+        //Asociamos el modelo al JTable
+        this.tbUsuariosRegistrados.setModel(modelo);
+        
+        
+        
     }
     
     public boolean verificarCamposVacios(){
         boolean bandera = false;
-        if (txtNombre.equals("") || txtApellidoPaterno.equals("") || txtApellidoMaterno.equals("") || txtNickName.equals("") || txtPassword.equals("")) {
+        if (txtNombre.getText().length()==0 || txtApellidoPaterno.getText().length()==0 || txtApellidoMaterno.getText().length()==0 || txtNickName.getText().length()==0 || txtPassword.getText().length()==0) {
             JOptionPane.showMessageDialog(null, "Faltan campos por rellenar");
             bandera = true;
         }
@@ -21,7 +42,28 @@ public class AdminUsuarios extends javax.swing.JFrame {
     }
     
     public void guardarDatos() {
+        empleado = new logica.Empleado();
+        empleado.setNombre(txtNombre.getText());
+        empleado.setApellido_paterno(txtApellidoPaterno.getText());
+        empleado.setApellido_materno(txtApellidoMaterno.getText());
+        empleado.setNickname(txtNickName.getText());
+        empleado.setPassword(txtPassword.getText());
         
+        logica.ConsultasEmpleado datosEmpleado = new logica.ConsultasEmpleado();
+        if (!datosEmpleado.registrarEmpleado(empleado))  {
+            JOptionPane.showMessageDialog(rootPane, "Empleado Registrado con éxito");
+            limpiarCampos();
+        }
+        else
+            JOptionPane.showMessageDialog(rootPane, "Fallo al registrar un nuevo Empleado");
+    }
+    
+    public void limpiarCampos() {
+        this.txtNombre.setText("");
+        this.txtApellidoMaterno.setText("");
+        this.txtApellidoPaterno.setText("");
+        this.txtNickName.setText("");
+        this.txtPassword.setText("");
     }
 
     /**
@@ -48,6 +90,9 @@ public class AdminUsuarios extends javax.swing.JFrame {
         btnRegistrar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbUsuariosRegistrados = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -119,7 +164,7 @@ public class AdminUsuarios extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, 600, 280));
@@ -138,12 +183,66 @@ public class AdminUsuarios extends javax.swing.JFrame {
 
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cancelarRegistro.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnCancelar, new java.awt.GridBagConstraints());
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 900, 60));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 900, 60));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/oxxo.png"))); // NOI18N
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, -1, -1));
+
+        jPanel3.setBackground(new java.awt.Color(254, 254, 254));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Usuarios Registrados"));
+
+        tbUsuariosRegistrados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Nombre", "Apellido Paterno", "Apellido Materno", "Nickname"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbUsuariosRegistrados.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tbUsuariosRegistrados);
+        if (tbUsuariosRegistrados.getColumnModel().getColumnCount() > 0) {
+            tbUsuariosRegistrados.getColumnModel().getColumn(0).setResizable(false);
+            tbUsuariosRegistrados.getColumnModel().getColumn(1).setResizable(false);
+            tbUsuariosRegistrados.getColumnModel().getColumn(2).setResizable(false);
+            tbUsuariosRegistrados.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 744, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(36, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 17, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 830, 160));
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/inicio.png"))); // NOI18N
         jMenu1.setText("Inicio");
@@ -241,6 +340,10 @@ public class AdminUsuarios extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jMenu3MouseClicked
 
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        limpiarCampos();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -295,6 +398,9 @@ public class AdminUsuarios extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tbUsuariosRegistrados;
     private javax.swing.JTextField txtApellidoMaterno;
     private javax.swing.JTextField txtApellidoPaterno;
     private javax.swing.JTextField txtNickName;

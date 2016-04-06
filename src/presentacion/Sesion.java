@@ -167,7 +167,7 @@ public class Sesion extends javax.swing.JFrame {
             }
             
         } else {
-            JOptionPane.showMessageDialog(null, "Usuario no encontrado");
+            JOptionPane.showMessageDialog(null, "Usuario y/o contraseña incorrectos");
         }
 
 // TODO add your handling code here:
