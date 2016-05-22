@@ -1,4 +1,5 @@
 # Archivos ignorados
+# Netbeans
 build/
 nbproject/
 nbbuild/
@@ -7,4 +8,30 @@ nbdist/
 build.xml
 nbactions.xml
 .nb-gradle/
+
+# Java
+*.class
+
+# Package Files
+*.jar
+*.war
+*.ear
+
+# Eclipse
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommmenders
+
+# Eclipse core
+.project
+
+# Others
 *~
