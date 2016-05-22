@@ -4,12 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class Conexion {
-    //conexion con php myadmin
-    
     private String driver = "com.mysql.jdbc.Driver";
-    private String connectString = "jdbc:mysql://172.24.33.124:3306/caduct";
-    private String user="u132029";
-    private String password="iliprinc";
+    private String connectString = "jdbc:mysql://192.168.100.7:3306/dbCaduct";
+    private String user="uAdminProyectos";
+    private String password="12345";
     public Connection con;
         
     public Conexion(){

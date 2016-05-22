@@ -1,31 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package presentacion;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.*;
 import javax.swing.JOptionPane;
-import logica.IniciarSesion;
+import logica.Empleado;
 
-/**
- *
- * @author Usuario
- */
 public class Sesion extends javax.swing.JFrame {
-
-    public int a;
-    private Object evt;
 
     public Sesion() {
         initComponents();
-
         setLocationRelativeTo(null);
-
     }
 
     public boolean acceso(String valor) {
@@ -35,10 +17,9 @@ public class Sesion extends javax.swing.JFrame {
             return false;
     }
 
-
-private void cerrar(){
-   this.dispose(); 
-}
+    private void cerrar() {
+        this.dispose();
+    }
 
 
     /**
@@ -51,6 +32,8 @@ private void cerrar(){
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
@@ -73,11 +56,21 @@ private void cerrar(){
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("ADMINISTRADOR");
+        setTitle("Login");
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(149, 159, 159));
+        jPanel3.setBackground(new java.awt.Color(221, 147, 16));
+        jPanel3.setLayout(new java.awt.GridBagLayout());
+
+        jLabel5.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(254, 254, 254));
+        jLabel5.setText("B I E N V E N I D O");
+        jPanel3.add(jLabel5, new java.awt.GridBagConstraints());
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 40));
+
+        jPanel2.setBackground(new java.awt.Color(174, 43, 14));
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -123,49 +116,58 @@ private void cerrar(){
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 50, -1, -1));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, -1, -1));
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logo.png"))); // NOI18N
         jLabel3.setToolTipText("");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
 
+        jButton1.setBackground(new java.awt.Color(236, 209, 10));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ingresar.png"))); // NOI18N
-        jButton1.setText("INGRESAR");
+        jButton1.setText(" INGRESAR ");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 160, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 220, -1, -1));
 
+        jButton2.setBackground(new java.awt.Color(236, 206, 10));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/salir.png"))); // NOI18N
-        jButton2.setText("SALIR");
+        jButton2.setText("     SALIR     ");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 160, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 220, -1, -1));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/sesion.png"))); // NOI18N
-        jLabel4.setText("jLabel4");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 250));
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo_login.png"))); // NOI18N
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 320));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        String valor="";
-        logica.IniciarSesion is = new logica.IniciarSesion();
-        valor = is.BusquedaPersona(txtUsuario.getText(), txtPassword.getText());
+        boolean numEmpleado;
+        logica.ConsultasEmpleado e = new logica.ConsultasEmpleado();
+        numEmpleado = e.buscarEmpleado(txtUsuario.getText(), txtPassword.getText());
         
-        boolean bandera = acceso(valor);
-        if (bandera) {
-            CajeroInicio ci = new CajeroInicio();
-            ci.setVisible(bandera);
-            dispose();
+        if (numEmpleado) {
+            if (Empleado.id_empleado == 1) {
+                AdminInicio adminInicio = new AdminInicio();
+                adminInicio.setVisible(true);
+                dispose();
+            } else {
+                CajeroInicio cajeroInicio = new CajeroInicio();
+                cajeroInicio.setVisible(true);
+                dispose();
+            }
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Usuario y/o contraseña incorrectos");
         }
 
 // TODO add your handling code here:
@@ -222,8 +224,10 @@ private void cerrar(){
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
