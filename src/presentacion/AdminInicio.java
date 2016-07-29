@@ -31,7 +31,6 @@ public class AdminInicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblLogoEmpresa = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -40,9 +39,6 @@ public class AdminInicio extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        lblNombreAdministrador = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         lblEslogan = new javax.swing.JLabel();
@@ -60,9 +56,6 @@ public class AdminInicio extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrador");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblLogoEmpresa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/oxxo.png"))); // NOI18N
-        getContentPane().add(lblLogoEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(254, 254, 254));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -93,17 +86,6 @@ public class AdminInicio extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Verdana", 1, 15)); // NOI18N
         jLabel9.setText("Sucursal:");
         jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, -1, -1));
-
-        jPanel4.setLayout(new java.awt.GridBagLayout());
-
-        jLabel10.setFont(new java.awt.Font("Trebuchet MS", 1, 15)); // NOI18N
-        jLabel10.setText("Bienvenido: ");
-        jPanel4.add(jLabel10, new java.awt.GridBagConstraints());
-
-        lblNombreAdministrador.setFont(new java.awt.Font("Verdana", 1, 15)); // NOI18N
-        jPanel4.add(lblNombreAdministrador, new java.awt.GridBagConstraints());
-
-        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, 50));
 
         jLabel4.setFont(new java.awt.Font("Verdana", 1, 15)); // NOI18N
         jLabel4.setText("Calle Petén No. 550");
@@ -264,7 +246,6 @@ public class AdminInicio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -283,10 +264,7 @@ public class AdminInicio extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel lblEslogan;
     private javax.swing.JLabel lblFondo;
-    private javax.swing.JLabel lblLogoEmpresa;
-    private javax.swing.JLabel lblNombreAdministrador;
     // End of variables declaration//GEN-END:variables
 }
